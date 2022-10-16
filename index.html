@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Todo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./index.css">
+  </head>
+  <body>
+    <div class="App">
+      <header>
+        <h1>오늘의 Todo</h1>
+      </header>
+      <main>
+        <div class="todo-div">
+          <form id="todo-form">
+            <select id="thema">
+              <option value="study">공부</option>
+              <option value="personal-growth">개인 성장</option>
+              <option value="networking-management">인맥 관리</option>
+            </select>
+            <input type="text" id="todo-input" placeholder="To Do 입력">
+            <button class="todo-form-button">➕</button>
+          </form>
+          <ul id="todo-list"></ul>
+        </div>
+      </main>
+      <script src="./src/index.js"></script>
+  </body>
+</html>
