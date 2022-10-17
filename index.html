@@ -14,7 +14,7 @@
       <main>
         <div class="todo-div">
           <form id="todo-form">
-            <select id="thema">
+            <select id="thema" onchange="showThema(target)">
               <option value="study">공부</option>
               <option value="personal-growth">개인 성장</option>
               <option value="networking-management">인맥 관리</option>
@@ -22,8 +22,11 @@
             <input type="text" id="todo-input" placeholder="To Do 입력">
             <button class="todo-form-button">➕</button>
           </form>
-          <ul id="todo-list"></ul>
+          <div id="todo-count">
+            진행: 0개&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;완료: 0개
+          </div>
         </div>
+        <ul id="todo-list"></ul>
       </main>
       <script src="./src/index.js"></script>
   </body>
