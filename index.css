@@ -61,6 +61,7 @@ header {
   background-color: #98A8F8;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
 }
 /* todo-count */
 #todo-count {
@@ -108,7 +109,7 @@ header {
   align-items: center;
 }
 
-#delete-button {
+.delete-button {
   margin-left: 10px;
   border: none;
   border-radius: 10px;

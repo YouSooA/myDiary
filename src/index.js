@@ -15,6 +15,10 @@ export default function App() {
     }
     return true;
   };
+  const showCount = () => {
+    const count = $('#todo-list').querySelectorAll('li').length;
+    $('#todo-count').textContent = `진행: ${count}개 완료: 0개`;
+  };
   const showTodoList = () => {
     const todosTemplate = this.todos
       .map((todo, index) => {
@@ -23,18 +27,15 @@ export default function App() {
         <div class="checkbox"></div>
         <div class="${todo.isCompleted ? 'completed' : ''} todo">${todo.content}</div>
         <div class="todo-end">
-          <span id="thema">${todo.thema}</span>
-          <button id="delete-button">x</button>
+          <span class="thema">${todo.thema}</span>
+          <button class="delete-button">x</button>
         </div>
       </li>
       `;
       })
       .join('');
     $('#todo-list').innerHTML = todosTemplate;
-  };
-  const showCount = () => {
-    const count = $('#todo-list').querySelectorAll('li').length;
-    $('#todo-count').textContent = `진행: ${count}개 완료: 0개`;
+    showCount();
   };
   const addTodo = () => {
     const todoInput = $('#todo-input').value;
@@ -45,7 +46,6 @@ export default function App() {
     this.todos.push({ thema, content: todoInput, isCompleted: '' });
     showTodoList();
     resetInput();
-    showCount();
   };
   $('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
