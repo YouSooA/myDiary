@@ -10,9 +10,9 @@ todo 추가 - addTodo 함수
 3. select 값과 input 값을 초기화하는 함수
 - [x] select은 '공부'로, input은 빈 값으로 초기화된다.
 
-4. 추가된 todo 출력 기능
-- [] 추가된 todo는 '<ul id="todo-list"></ul>'에 안에 넣어야 한다.
-- [] 진행하고 있는 todo 갯수와 완료한 todo 갯수를 화면에 표시한다.
+4. 추가된 todo 결과 출력 기능
+- [x] 추가된 todo는 '<ul id="todo-list"></ul>'에 안에 넣어야 한다.
+- [x] 진행하고 있는 todo 갯수와 완료한 todo 갯수를 화면에 표시한다.
 
 
 todo 수정

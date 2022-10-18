@@ -14,12 +14,35 @@ export default function App() {
     }
     return true;
   };
+  const showTodoList = (todo, thema) => {
+    const todoTemplate = (todoItem, themaState) => {
+      return `
+      <li class="todo-item checked">
+        <div class="checkbox">✔</div>
+        <div class="todo">${todoItem}</div>
+        <div class="todo-end">
+          <span id="thema">${themaState}</span>
+          <button id="delete-button">x</button>
+        </div>
+      </li>
+      `;
+    };
+    $('#todo-list').insertAdjacentHTML('beforeend', todoTemplate(todo, thema));
+  };
+  const showCount = () => {
+    const count = $('#todo-list').querySelectorAll('li').length;
+    $('#todo-count').textContent = `진행: ${count}개 완료: 0개`;
+  }
   const addTodo = () => {
     const todo = $('#todo-input').value;
     const thema = $('#thema-select').options[$('#thema-select').selectedIndex].text;
+    if (!checkInput(todo)) {
+      return;
+    }
+    showTodoList(todo, thema);
     resetInput();
+    showCount();
   };
-
   $('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
     addTodo();
