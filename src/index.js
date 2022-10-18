@@ -14,8 +14,10 @@ export default function App() {
   };
   const addTodo = () => {
     const todo = $('#todo-input').value;
+    const thema = $('#thema-select').options[$('#thema-select').selectedIndex].text;
     checkInput(todo);
     resetInput();
+    console.log(todo, thema);
   };
 
   $('#todo-form').addEventListener('submit', (e) => {
