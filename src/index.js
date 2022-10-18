@@ -1,45 +1,49 @@
 import { $ } from './utils/utils.js';
 
 export default function App() {
+  this.todos = [];
   const resetInput = () => {
     $('#todo-input').value = '';
     $('#todo-input').focus();
     $('#thema-select').options[0].selected = true;
   };
-  const checkInput = (todo) => {
-    if (todo.replace(/\s/g, '') === '') {
+  const checkInput = (todoInput) => {
+    if (todoInput.replace(/\s/g, '') === '') {
       resetInput();
       alert('다시 todo를 입력해주세요.');
       return false;
     }
     return true;
   };
-  const showTodoList = (todo, thema) => {
-    const todoTemplate = (todoItem, themaState) => {
-      return `
-      <li class="todo-item checked">
-        <div class="checkbox">✔</div>
-        <div class="todo">${todoItem}</div>
+  const showTodoList = () => {
+    const todosTemplate = this.todos
+      .map((todo, index) => {
+        return `
+      <li data-todo-id="${index}" class="todo-item checked">
+        <div class="checkbox"></div>
+        <div class="${todo.isCompleted ? 'completed' : ''} todo">${todo.content}</div>
         <div class="todo-end">
-          <span id="thema">${themaState}</span>
+          <span id="thema">${todo.thema}</span>
           <button id="delete-button">x</button>
         </div>
       </li>
       `;
-    };
-    $('#todo-list').insertAdjacentHTML('beforeend', todoTemplate(todo, thema));
+      })
+      .join('');
+    $('#todo-list').innerHTML = todosTemplate;
   };
   const showCount = () => {
     const count = $('#todo-list').querySelectorAll('li').length;
     $('#todo-count').textContent = `진행: ${count}개 완료: 0개`;
-  }
+  };
   const addTodo = () => {
-    const todo = $('#todo-input').value;
+    const todoInput = $('#todo-input').value;
     const thema = $('#thema-select').options[$('#thema-select').selectedIndex].text;
-    if (!checkInput(todo)) {
+    if (!checkInput(todoInput)) {
       return;
     }
-    showTodoList(todo, thema);
+    this.todos.push({ thema, content: todoInput, isCompleted: '' });
+    showTodoList();
     resetInput();
     showCount();
   };
