@@ -7,8 +7,8 @@ todo 추가 - addTodo 함수
 - [x] 입력을 받고 엔터키 입력으로 input값을 변수 'todo'에 저장한다.
 - [x] 입력을 받고 +버튼 클릭으로 input값을 변수 'todo'에 저장한다.
 
-3. select 값과 input 값을 초기화하는 기능
-- [] select은 '공부'로, input은 빈 값으로 초기화된다.
+3. select 값과 input 값을 초기화하는 함수
+- [x] select은 '공부'로, input은 빈 값으로 초기화된다.
 
 4. 추가된 todo 출력 기능
 - [] 추가된 todo는 '<ul id="todo-list"></ul>'에 안에 넣어야 한다.
