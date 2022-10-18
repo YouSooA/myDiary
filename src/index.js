@@ -6,9 +6,14 @@ export default function App() {
       return alert('다시 todo를 입력해주세요.');
     }
   };
+  const addTodo = () => {
+    const todo = $('#todo-input').value;
+    checkInput(todo);
+  };
 
   $('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
+    addTodo();
   });
 }
 
