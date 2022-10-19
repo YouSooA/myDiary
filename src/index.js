@@ -1,4 +1,5 @@
-import { $, ERROR_INPUT_MESSAGE, DELETE_TODO_MASSAGE, EDIT_MESSAGE } from './utils/utils.js';
+import $ from './utils/DomElement.js';
+import { ERROR_INPUT_MESSAGE, DELETE_TODO_MASSAGE, EDIT_MESSAGE } from './utils/message.js';
 import store from './store/store.js';
 
 export default function App() {
