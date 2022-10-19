@@ -1,11 +1,11 @@
-import { $, ERROR_INPUT_MESSAGE, REMOVE_TODO_MASSAGE, EDIT_MESSAGE } from './utils/utils.js';
+import { $, ERROR_INPUT_MESSAGE, DELETE_TODO_MASSAGE, EDIT_MESSAGE } from './utils/utils.js';
 import store from './store/store.js';
 
 export default function App() {
-  this.todos = [];
+  this.todoList = [];
   this.init = () => {
     if (store.getLocalStorage()) {
-      this.todos = store.getLocalStorage();
+      this.todoList = store.getLocalStorage();
     }
     showTodoList();
     initaddEventListeners();
@@ -25,12 +25,12 @@ export default function App() {
   };
   const showCount = () => {
     const count = $('#todo-list').querySelectorAll('li').length;
-    const completedCount = this.todos.filter((todo) => todo.isCompleted === true).length;
+    const completedCount = this.todoList.filter((todo) => todo.isCompleted === true).length;
     const notCompletedCount = count - completedCount;
     $('#todo-count').textContent = `진행: ${notCompletedCount}개 완료: ${completedCount}개`;
   };
   const showTodoList = () => {
-    const todosTemplate = this.todos
+    const todosTemplate = this.todoList
       .map((todo, index) => {
         return `
       <li data-todo-id="${index}" class="todo-item checked">
@@ -53,45 +53,45 @@ export default function App() {
     if (!checkInput(todoInput)) {
       return;
     }
-    this.todos.push({ thema, content: todoInput, isCompleted: false });
-    store.setLocalStorage(this.todos);
+    this.todoList.push({ thema, content: todoInput, isCompleted: false });
+    store.setLocalStorage(this.todoList);
     showTodoList();
     resetInput();
   };
-  const removeTodo = (todoId) => {
-    if (confirm(REMOVE_TODO_MASSAGE)) {
-      this.todos.splice(todoId, 1);
-      store.setLocalStorage(this.todos);
+  const deleteTodo = (todoId) => {
+    if (confirm(DELETE_TODO_MASSAGE)) {
+      this.todoList.splice(todoId, 1);
+      store.setLocalStorage(this.todoList);
       showTodoList();
     }
   };
-  const editTodoContent = (todoId) => {
-    const todoContent = this.todos[todoId].content;
-    const editedTodo = prompt(EDIT_MESSAGE('todo'), todoContent);
-    if (!editedTodo || editedTodo.replace(/\s/g, '') === '') {
+  const editContent = (todoId) => {
+    const { content } = this.todoList[todoId];
+    const editedContent = prompt(EDIT_MESSAGE('todo'), content);
+    if (!editedContent || editedContent.replace(/\s/g, '') === '') {
       return alert(ERROR_INPUT_MESSAGE.blank('수정'));
     }
-    this.todos[todoId].content = editedTodo;
-    store.setLocalStorage(this.todos);
+    this.todoList[todoId].content = editedContent;
+    store.setLocalStorage(this.todoList);
     showTodoList();
   };
-  const editTodoThema = (todoId) => {
-    const { thema } = this.todos[todoId];
+  const editThema = (todoId) => {
+    const { thema } = this.todoList[todoId];
     const editedThema = prompt(EDIT_MESSAGE('테마'), thema);
     const themaCategory = ['공부', '개인 성장', '인맥 관리'];
     if (!themaCategory.includes(editedThema)) {
       return alert(ERROR_INPUT_MESSAGE.notInThemaOptions);
     }
-    this.todos[todoId].thema = editedThema;
-    store.setLocalStorage(this.todos);
+    this.todoList[todoId].thema = editedThema;
+    store.setLocalStorage(this.todoList);
     showTodoList();
   };
   const completeTodo = (todoId) => {
-    this.todos[todoId].isCompleted = !this.todos[todoId].isCompleted;
+    this.todoList[todoId].isCompleted = !this.todoList[todoId].isCompleted;
     showTodoList();
   };
   const isCompleted = (todoId) => {
-    return this.todos[todoId].isCompleted === true;
+    return this.todoList[todoId].isCompleted === true;
   };
   const initaddEventListeners = () => {
     $('#todo-form').addEventListener('submit', (e) => {
@@ -101,13 +101,13 @@ export default function App() {
     $('#todo-list').addEventListener('click', (e) => {
       const { todoId } = e.target.closest('li').dataset;
       if (e.target.classList.contains('delete-button')) {
-        return removeTodo(todoId);
+        return deleteTodo(todoId);
       }
       if (e.target.classList.contains('todo') && !isCompleted(todoId)) {
-        return editTodoContent(todoId);
+        return editContent(todoId);
       }
       if (e.target.classList.contains('thema') && !isCompleted(todoId)) {
-        return editTodoThema(todoId);
+        return editThema(todoId);
       }
       if (e.target.classList.contains('checkbox')) {
         return completeTodo(todoId);

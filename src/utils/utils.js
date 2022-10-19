@@ -7,6 +7,6 @@ const ERROR_INPUT_MESSAGE = {
   },
   notInThemaOptions: '공부, 개인 성장, 인맥 관리 중 하나를 선택하세요.',
 };
-const REMOVE_TODO_MASSAGE = '정말로 삭제하시겠습니까?';
+const DELETE_TODO_MASSAGE = '정말로 삭제하시겠습니까?';
 
-export { $, ERROR_INPUT_MESSAGE, REMOVE_TODO_MASSAGE, EDIT_MESSAGE };
+export { $, ERROR_INPUT_MESSAGE, DELETE_TODO_MASSAGE, EDIT_MESSAGE };
