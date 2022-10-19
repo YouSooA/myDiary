@@ -65,7 +65,17 @@ export default function App() {
     this.todos[todoId].content = editedTodo;
     showTodoList();
   };
-  
+  const editTodoThema = (e) => {
+    const todoId = e.target.closest('li').dataset.todoId;
+    const thema = e.target.textContent;
+    const editedThema = prompt('수정할 todo를 입력해주세요.', thema);
+    if (!['공부', '개인 성장', '인맥 관리'].includes(editedThema)) {
+      return alert('공부, 개인 성장, 인맥 관리 중 하나를 선택하세요.');
+    }
+    this.todos[todoId].thema = editedThema;
+    showTodoList();
+  };
+
   $('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
     addTodo();
@@ -76,6 +86,9 @@ export default function App() {
     }
     if (e.target.classList.contains('todo')) {
       return editTodoContent(e);
+    }
+    if (e.target.classList.contains('thema')) {
+      return editTodoThema(e);
     }
   });
 }
