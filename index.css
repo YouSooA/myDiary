@@ -39,7 +39,7 @@ header {
 #todo-form {
   display: flex;
 }
-#thema-select {
+#category-select {
   width: 25%;
   height: 30px;
   margin-right: 10px;

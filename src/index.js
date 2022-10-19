@@ -13,7 +13,7 @@ export default function App() {
   const resetInput = () => {
     $('#todo-input').value = '';
     $('#todo-input').focus();
-    $('#thema-select').options[0].selected = true;
+    $('#category-select').options[0].selected = true;
   };
   const checkInput = (todoInput) => {
     if (todoInput.replace(/\s/g, '') === '') {
@@ -37,7 +37,7 @@ export default function App() {
         <div class="${todo.isCompleted ? 'completed' : ''} checkbox">✔</div>
         <div class="${todo.isCompleted ? 'completed' : ''} todo">${todo.content}</div>
         <div class="todo-end">
-          <span class="thema">${todo.thema}</span>
+          <span class="category">${todo.category}</span>
           <button class="delete-button">x</button>
         </div>
       </li>
@@ -49,11 +49,11 @@ export default function App() {
   };
   const addTodo = () => {
     const todoInput = $('#todo-input').value;
-    const thema = $('#thema-select').options[$('#thema-select').selectedIndex].text;
+    const category = $('#category-select').options[$('#category-select').selectedIndex].text;
     if (!checkInput(todoInput)) {
       return;
     }
-    this.todoList.push({ thema, content: todoInput, isCompleted: false });
+    this.todoList.push({ category, content: todoInput, isCompleted: false });
     store.setLocalStorage(this.todoList);
     showTodoList();
     resetInput();
@@ -75,14 +75,14 @@ export default function App() {
     store.setLocalStorage(this.todoList);
     showTodoList();
   };
-  const editThema = (todoId) => {
-    const { thema } = this.todoList[todoId];
-    const editedThema = prompt(EDIT_MESSAGE('테마'), thema);
-    const themaCategory = ['공부', '개인 성장', '인맥 관리'];
-    if (!themaCategory.includes(editedThema)) {
-      return alert(ERROR_INPUT_MESSAGE.notInThemaOptions);
+  const editCategory = (todoId) => {
+    const { category } = this.todoList[todoId];
+    const editedCategory = prompt(EDIT_MESSAGE('테마'), category);
+    const categoryOptions = ['공부', '개인 성장', '인맥 관리'];
+    if (!categoryOptions.includes(editedCategory)) {
+      return alert(ERROR_INPUT_MESSAGE.notInCategoryOptions);
     }
-    this.todoList[todoId].thema = editedThema;
+    this.todoList[todoId].category = editedCategory;
     store.setLocalStorage(this.todoList);
     showTodoList();
   };
@@ -106,8 +106,8 @@ export default function App() {
       if (e.target.classList.contains('todo') && !isCompleted(todoId)) {
         return editContent(todoId);
       }
-      if (e.target.classList.contains('thema') && !isCompleted(todoId)) {
-        return editThema(todoId);
+      if (e.target.classList.contains('category') && !isCompleted(todoId)) {
+        return editCategory(todoId);
       }
       if (e.target.classList.contains('checkbox')) {
         return completeTodo(todoId);
