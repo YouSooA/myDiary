@@ -81,7 +81,10 @@ export default function App() {
     this.todos[todoId].isCompleted = !this.todos[todoId].isCompleted;
     showTodoList();
   };
-
+  const isCompleted = (e) => {
+    const todoId = e.target.closest('li').dataset.todoId;
+    return this.todos[todoId].isCompleted === true;
+  }
   $('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
     addTodo();
@@ -90,10 +93,10 @@ export default function App() {
     if (e.target.classList.contains('delete-button')) {
       return removeTodo(e);
     }
-    if (e.target.classList.contains('todo')) {
+    if (e.target.classList.contains('todo') && !isCompleted(e)) {
       return editTodoContent(e);
     }
-    if (e.target.classList.contains('thema')) {
+    if (e.target.classList.contains('thema') && !isCompleted(e)) {
       return editTodoThema(e);
     }
     if (e.target.classList.contains('checkbox')) {
