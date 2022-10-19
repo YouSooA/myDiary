@@ -1,6 +1,6 @@
 const store = {
-  setLocalStorage(todos) {
-    localStorage.setItem('todoList', JSON.stringify(todos));
+  setLocalStorage(todoList) {
+    localStorage.setItem('todoList', JSON.stringify(todoList));
   },
   getLocalStorage() {
     return JSON.parse(localStorage.getItem('todoList'));
