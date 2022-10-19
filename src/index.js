@@ -69,7 +69,10 @@ export default function App() {
   const editContent = (todoId) => {
     const { content } = this.todoList[todoId];
     const editedContent = prompt(EDIT_MESSAGE('todo'), content);
-    if (!editedContent || editedContent.replace(/\s/g, '') === '') {
+    if (!editedContent) {
+      return;
+    }
+    if (editedContent.replace(/\s/g, '') === '') {
       alert(ERROR_INPUT_MESSAGE.blank('수정'));
       return;
     }
@@ -81,6 +84,9 @@ export default function App() {
     const { category } = this.todoList[todoId];
     const editedCategory = prompt(EDIT_MESSAGE('테마'), category);
     const categoryOptions = ['공부', '개인 성장', '인맥 관리'];
+    if (!editedCategory) {
+      return;
+    }
     if (!categoryOptions.includes(editedCategory)) {
       alert(ERROR_INPUT_MESSAGE.notInCategoryOptions);
       return;
