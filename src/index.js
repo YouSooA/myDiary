@@ -1,7 +1,15 @@
 import { $ } from './utils/utils.js';
+import store from './store/store.js';
 
 export default function App() {
   this.todos = [];
+  this.init = () => {
+    if (store.getLocalStorage()) {
+      this.todos = store.getLocalStorage();
+    }
+    showTodoList();
+    initaddEventListeners();
+  };
   const resetInput = () => {
     $('#todo-input').value = '';
     $('#todo-input').focus();
@@ -46,6 +54,7 @@ export default function App() {
       return;
     }
     this.todos.push({ thema, content: todoInput, isCompleted: false });
+    store.setLocalStorage(this.todos);
     showTodoList();
     resetInput();
   };
@@ -53,6 +62,7 @@ export default function App() {
     if (confirm('정말로 삭제하시겠습니까?')) {
       const todoId = e.target.closest('li').dataset.todoId;
       this.todos.splice(todoId, 1);
+      store.setLocalStorage(this.todos);
       showTodoList();
     }
   };
@@ -64,6 +74,7 @@ export default function App() {
       return alert('다시 todo를 수정해주세요.');
     }
     this.todos[todoId].content = editedTodo;
+    store.setLocalStorage(this.todos);
     showTodoList();
   };
   const editTodoThema = (e) => {
@@ -74,6 +85,7 @@ export default function App() {
       return alert('공부, 개인 성장, 인맥 관리 중 하나를 선택하세요.');
     }
     this.todos[todoId].thema = editedThema;
+    store.setLocalStorage(this.todos);
     showTodoList();
   };
   const completeTodo = (e) => {
@@ -84,25 +96,28 @@ export default function App() {
   const isCompleted = (e) => {
     const todoId = e.target.closest('li').dataset.todoId;
     return this.todos[todoId].isCompleted === true;
-  }
-  $('#todo-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    addTodo();
-  });
-  $('#todo-list').addEventListener('click', (e) => {
-    if (e.target.classList.contains('delete-button')) {
-      return removeTodo(e);
-    }
-    if (e.target.classList.contains('todo') && !isCompleted(e)) {
-      return editTodoContent(e);
-    }
-    if (e.target.classList.contains('thema') && !isCompleted(e)) {
-      return editTodoThema(e);
-    }
-    if (e.target.classList.contains('checkbox')) {
-      return completeTodo(e);
-    }
-  });
+  };
+  const initaddEventListeners = () => {
+    $('#todo-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      addTodo();
+    });
+    $('#todo-list').addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete-button')) {
+        return removeTodo(e);
+      }
+      if (e.target.classList.contains('todo') && !isCompleted(e)) {
+        return editTodoContent(e);
+      }
+      if (e.target.classList.contains('thema') && !isCompleted(e)) {
+        return editTodoThema(e);
+      }
+      if (e.target.classList.contains('checkbox')) {
+        return completeTodo(e);
+      }
+    });
+  };
 }
 
-new App();
+const app = new App();
+app.init();
