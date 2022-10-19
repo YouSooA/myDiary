@@ -19,6 +19,6 @@ module.exports = {
     'max-depth': ['error', 2],
     // 함수 최대 코드 줄 수 15
     'max-lines-per-function': ['error', 15],
-    // 
+    'no-alert': 'off',
   },
 };
