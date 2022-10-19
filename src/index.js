@@ -60,7 +60,7 @@ export default function App() {
     resetInput();
   };
   const deleteTodo = (todoId) => {
-    if (confirm(DELETE_TODO_MASSAGE)) {
+    if (window.confirm(DELETE_TODO_MASSAGE)) {
       this.todoList.splice(todoId, 1);
       store.setLocalStorage(this.todoList);
       render();
