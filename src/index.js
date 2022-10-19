@@ -70,7 +70,8 @@ export default function App() {
     const { content } = this.todoList[todoId];
     const editedContent = prompt(EDIT_MESSAGE('todo'), content);
     if (!editedContent || editedContent.replace(/\s/g, '') === '') {
-      return alert(ERROR_INPUT_MESSAGE.blank('수정'));
+      alert(ERROR_INPUT_MESSAGE.blank('수정'));
+      return;
     }
     this.todoList[todoId].content = editedContent;
     store.setLocalStorage(this.todoList);
@@ -81,7 +82,8 @@ export default function App() {
     const editedCategory = prompt(EDIT_MESSAGE('테마'), category);
     const categoryOptions = ['공부', '개인 성장', '인맥 관리'];
     if (!categoryOptions.includes(editedCategory)) {
-      return alert(ERROR_INPUT_MESSAGE.notInCategoryOptions);
+      alert(ERROR_INPUT_MESSAGE.notInCategoryOptions);
+      return;
     }
     this.todoList[todoId].category = editedCategory;
     store.setLocalStorage(this.todoList);
@@ -102,16 +104,19 @@ export default function App() {
     $('#todo-list').addEventListener('click', (e) => {
       const { todoId } = e.target.closest('li').dataset;
       if (e.target.classList.contains('delete-button')) {
-        return deleteTodo(todoId);
+        deleteTodo(todoId);
+        return;
       }
       if (e.target.classList.contains('todo') && !isCompleted(todoId)) {
-        return editContent(todoId);
+        editContent(todoId);
+        return;
       }
       if (e.target.classList.contains('category') && !isCompleted(todoId)) {
-        return editCategory(todoId);
+        editCategory(todoId);
+        return;
       }
       if (e.target.classList.contains('checkbox')) {
-        return completeTodo(todoId);
+        completeTodo(todoId);
       }
     });
   };
