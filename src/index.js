@@ -91,6 +91,7 @@ export default function App() {
   };
   const completeTodo = (todoId) => {
     this.todoList[todoId].isCompleted = !this.todoList[todoId].isCompleted;
+    store.setLocalStorage(this.todoList);
     render();
   };
   const isCompleted = (todoId) => {
