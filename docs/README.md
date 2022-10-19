@@ -19,10 +19,10 @@ todo 삭제
 - [x] confirm에 확인 버튼을 누르면 해당 todo는 삭제된다.
 - [x] 진행하고 있는 todo 갯수와 완료한 todo 갯수를 수정한다.
 
-todo 수정
-- [] todo의 수정 버튼 클릭 이벤트를 받고, todo 수정하는 모달창(prompt)을 띄운다.
-- [] prompt 창에 todo를 수정하고 확인 버튼을 누르면 todo가 수정된다.
-
+todo content 수정
+- [x] todo를 클릭하면 'prompt'창을 띄운다.
+- [x] 'prompt'창에 todo를 수정하고, 확인을 누르면 todo가 수정된다.
+ - [x] 유효하지 않은 todo는 'alert'창을 띄운다.
 
 todo 완료
 - [] todo의 완료 버튼 클릭 이벤트를 받고, todo를 완료하는 모달창(confirm)을 띄운다.

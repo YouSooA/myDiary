@@ -54,6 +54,18 @@ export default function App() {
       showTodoList();
     }
   };
+  const editTodoContent = (e) => {
+    const todoId = e.target.closest('li').dataset.todoId;
+    const todo = e.target.textContent;
+    const editedTodo = prompt('수정할 todo를 입력해주세요.', todo);
+    console.log(editedTodo);
+    if (editedTodo.replace(/\s/g, '') === '') {
+      return alert('다시 todo를 수정해주세요.');
+    }
+    this.todos[todoId].content = editedTodo;
+    showTodoList();
+  };
+  
   $('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
     addTodo();
@@ -61,6 +73,9 @@ export default function App() {
   $('#todo-list').addEventListener('click', (e) => {
     if (e.target.classList.contains('delete-button')) {
       return removeTodo(e);
+    }
+    if (e.target.classList.contains('todo')) {
+      return editTodoContent(e);
     }
   });
 }
