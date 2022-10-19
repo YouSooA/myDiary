@@ -58,17 +58,15 @@ export default function App() {
     showTodoList();
     resetInput();
   };
-  const removeTodo = (e) => {
+  const removeTodo = (todoId) => {
     if (confirm(REMOVE_TODO_MASSAGE)) {
-      const { todoId } = e.target.closest('li').dataset;
       this.todos.splice(todoId, 1);
       store.setLocalStorage(this.todos);
       showTodoList();
     }
   };
-  const editTodoContent = (e) => {
-    const { todoId } = e.target.closest('li').dataset;
-    const todoContent = e.target.textContent;
+  const editTodoContent = (todoId) => {
+    const todoContent = this.todos[todoId].content;
     const editedTodo = prompt(EDIT_MESSAGE('todo'), todoContent);
     if (!editedTodo || editedTodo.replace(/\s/g, '') === '') {
       return alert(ERROR_INPUT_MESSAGE.blank('수정'));
@@ -77,9 +75,8 @@ export default function App() {
     store.setLocalStorage(this.todos);
     showTodoList();
   };
-  const editTodoThema = (e) => {
-    const { todoId } = e.target.closest('li').dataset;
-    const thema = e.target.textContent;
+  const editTodoThema = (todoId) => {
+    const { thema } = this.todos[todoId];
     const editedThema = prompt(EDIT_MESSAGE('테마'), thema);
     const themaCategory = ['공부', '개인 성장', '인맥 관리'];
     if (!themaCategory.includes(editedThema)) {
@@ -89,13 +86,11 @@ export default function App() {
     store.setLocalStorage(this.todos);
     showTodoList();
   };
-  const completeTodo = (e) => {
-    const { todoId } = e.target.closest('li').dataset;
+  const completeTodo = (todoId) => {
     this.todos[todoId].isCompleted = !this.todos[todoId].isCompleted;
     showTodoList();
   };
-  const isCompleted = (e) => {
-    const { todoId } = e.target.closest('li').dataset;
+  const isCompleted = (todoId) => {
     return this.todos[todoId].isCompleted === true;
   };
   const initaddEventListeners = () => {
@@ -104,17 +99,18 @@ export default function App() {
       addTodo();
     });
     $('#todo-list').addEventListener('click', (e) => {
+      const { todoId } = e.target.closest('li').dataset;
       if (e.target.classList.contains('delete-button')) {
-        return removeTodo(e);
+        return removeTodo(todoId);
       }
-      if (e.target.classList.contains('todo') && !isCompleted(e)) {
-        return editTodoContent(e);
+      if (e.target.classList.contains('todo') && !isCompleted(todoId)) {
+        return editTodoContent(todoId);
       }
-      if (e.target.classList.contains('thema') && !isCompleted(e)) {
-        return editTodoThema(e);
+      if (e.target.classList.contains('thema') && !isCompleted(todoId)) {
+        return editTodoThema(todoId);
       }
       if (e.target.classList.contains('checkbox')) {
-        return completeTodo(e);
+        return completeTodo(todoId);
       }
     });
   };
