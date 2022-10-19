@@ -35,3 +35,7 @@ todo 완료
 - [x] 해당 todo의 체크박스에 체크가 표시되고, content는 취소선이 나타난다.
 - [x] 진행하고 있는 todo 갯수와 완료한 todo 갯수를 수정한다.
 - [x] 완료된 todo의 content와 thema를 수정하지 못하도록 한다.
+
+todo localStorage
+- [x] localStorage에 todos 데이터를 저장한다.
+- [x] localStorage에 todos 데이터를 가져올 수 있도록 한다.
