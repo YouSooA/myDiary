@@ -84,7 +84,7 @@ header {
   border: 1px solid lightgray;
   cursor: pointer;
   text-align: center;
-  color: #98A8F8;;
+  color: #fff;
 }
 .todo-item {
   padding-top: 10px;
@@ -96,6 +96,13 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+.completed.checkbox {
+  color: #98A8F8;
+}
+.completed.todo {
+  opacity: 0.5;
+  text-decoration: line-through;
 }
 .todo {
   font-size: 1rem;

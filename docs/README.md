@@ -23,7 +23,7 @@ todo content 수정
 - [x] todo를 클릭하면 'prompt'창을 띄운다.
 - [x] 'prompt'창에 todo를 수정하고, 확인을 누르면 todo가 수정된다.
  - [x] 유효하지 않은 todo는 'alert'창을 띄운다.
- 
+
 todo thema 수정
 - [x] thema를 클릭하면 'prompt'창을 띄운다.
 - [x] 'prompt'창에 thema를 수정하고, thema값이 공부, 개인 성장, 인맥 관리인지 확인한다.
@@ -31,6 +31,6 @@ todo thema 수정
 - [x] 수정하고 확인버튼을 누르면, thema가 수정된다. 
 
 todo 완료
-- [] todo의 완료 버튼 클릭 이벤트를 받고, todo를 완료하는 모달창(confirm)을 띄운다.
-- [] confrim에 확인 버튼을 누르면 해당 todo는 취소선 표시로 나타난다.
-- [] 진행하고 있는 todo 갯수와 완료한 todo 갯수를 수정한다.
+- [x] todo의 체크박스 버튼 클릭 이벤트를 받는다.
+- [x] 해당 todo의 체크박스에 체크가 표시되고, content는 취소선이 나타난다.
+- [x] 진행하고 있는 todo 갯수와 완료한 todo 갯수를 수정한다.

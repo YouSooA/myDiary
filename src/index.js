@@ -17,14 +17,16 @@ export default function App() {
   };
   const showCount = () => {
     const count = $('#todo-list').querySelectorAll('li').length;
-    $('#todo-count').textContent = `진행: ${count}개 완료: 0개`;
+    const completedCount = this.todos.filter((todo) => todo.isCompleted === true).length;
+    const notCompletedCount = count - completedCount;
+    $('#todo-count').textContent = `진행: ${notCompletedCount}개 완료: ${completedCount}개`;
   };
   const showTodoList = () => {
     const todosTemplate = this.todos
       .map((todo, index) => {
         return `
       <li data-todo-id="${index}" class="todo-item checked">
-        <div class="checkbox"></div>
+        <div class="${todo.isCompleted ? 'completed' : ''} checkbox">✔</div>
         <div class="${todo.isCompleted ? 'completed' : ''} todo">${todo.content}</div>
         <div class="todo-end">
           <span class="thema">${todo.thema}</span>
@@ -43,7 +45,7 @@ export default function App() {
     if (!checkInput(todoInput)) {
       return;
     }
-    this.todos.push({ thema, content: todoInput, isCompleted: '' });
+    this.todos.push({ thema, content: todoInput, isCompleted: false });
     showTodoList();
     resetInput();
   };
@@ -56,9 +58,8 @@ export default function App() {
   };
   const editTodoContent = (e) => {
     const todoId = e.target.closest('li').dataset.todoId;
-    const todo = e.target.textContent;
-    const editedTodo = prompt('수정할 todo를 입력해주세요.', todo);
-    console.log(editedTodo);
+    const todoContent = e.target.textContent;
+    const editedTodo = prompt('수정할 todo를 입력해주세요.', todoContent);
     if (editedTodo.replace(/\s/g, '') === '') {
       return alert('다시 todo를 수정해주세요.');
     }
@@ -75,6 +76,11 @@ export default function App() {
     this.todos[todoId].thema = editedThema;
     showTodoList();
   };
+  const completeTodo = (e) => {
+    const todoId = e.target.closest('li').dataset.todoId;
+    this.todos[todoId].isCompleted = !this.todos[todoId].isCompleted;
+    showTodoList();
+  };
 
   $('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
@@ -89,6 +95,9 @@ export default function App() {
     }
     if (e.target.classList.contains('thema')) {
       return editTodoThema(e);
+    }
+    if (e.target.classList.contains('checkbox')) {
+      return completeTodo(e);
     }
   });
 }
