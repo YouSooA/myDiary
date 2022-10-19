@@ -60,7 +60,7 @@ export default function App() {
     const todoId = e.target.closest('li').dataset.todoId;
     const todoContent = e.target.textContent;
     const editedTodo = prompt('수정할 todo를 입력해주세요.', todoContent);
-    if (editedTodo.replace(/\s/g, '') === '') {
+    if (!editedTodo || editedTodo.replace(/\s/g, '') === '') {
       return alert('다시 todo를 수정해주세요.');
     }
     this.todos[todoId].content = editedTodo;
