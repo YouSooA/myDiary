@@ -1,4 +1,4 @@
-import { $ } from './utils/utils.js';
+import { $, ERROR_INPUT_MESSAGE, REMOVE_TODO_MASSAGE, EDIT_MESSAGE } from './utils/utils.js';
 import store from './store/store.js';
 
 export default function App() {
@@ -18,7 +18,7 @@ export default function App() {
   const checkInput = (todoInput) => {
     if (todoInput.replace(/\s/g, '') === '') {
       resetInput();
-      alert('다시 todo를 입력해주세요.');
+      alert(ERROR_INPUT_MESSAGE.blank('입력'));
       return false;
     }
     return true;
@@ -59,42 +59,43 @@ export default function App() {
     resetInput();
   };
   const removeTodo = (e) => {
-    if (confirm('정말로 삭제하시겠습니까?')) {
-      const todoId = e.target.closest('li').dataset.todoId;
+    if (confirm(REMOVE_TODO_MASSAGE)) {
+      const { todoId } = e.target.closest('li').dataset;
       this.todos.splice(todoId, 1);
       store.setLocalStorage(this.todos);
       showTodoList();
     }
   };
   const editTodoContent = (e) => {
-    const todoId = e.target.closest('li').dataset.todoId;
+    const { todoId } = e.target.closest('li').dataset;
     const todoContent = e.target.textContent;
-    const editedTodo = prompt('수정할 todo를 입력해주세요.', todoContent);
+    const editedTodo = prompt(EDIT_MESSAGE('todo'), todoContent);
     if (!editedTodo || editedTodo.replace(/\s/g, '') === '') {
-      return alert('다시 todo를 수정해주세요.');
+      return alert(ERROR_INPUT_MESSAGE.blank('수정'));
     }
     this.todos[todoId].content = editedTodo;
     store.setLocalStorage(this.todos);
     showTodoList();
   };
   const editTodoThema = (e) => {
-    const todoId = e.target.closest('li').dataset.todoId;
+    const { todoId } = e.target.closest('li').dataset;
     const thema = e.target.textContent;
-    const editedThema = prompt('수정할 todo를 입력해주세요.', thema);
-    if (!['공부', '개인 성장', '인맥 관리'].includes(editedThema)) {
-      return alert('공부, 개인 성장, 인맥 관리 중 하나를 선택하세요.');
+    const editedThema = prompt(EDIT_MESSAGE('테마'), thema);
+    const themaCategory = ['공부', '개인 성장', '인맥 관리'];
+    if (!themaCategory.includes(editedThema)) {
+      return alert(ERROR_INPUT_MESSAGE.notInThemaOptions);
     }
     this.todos[todoId].thema = editedThema;
     store.setLocalStorage(this.todos);
     showTodoList();
   };
   const completeTodo = (e) => {
-    const todoId = e.target.closest('li').dataset.todoId;
+    const { todoId } = e.target.closest('li').dataset;
     this.todos[todoId].isCompleted = !this.todos[todoId].isCompleted;
     showTodoList();
   };
   const isCompleted = (e) => {
-    const todoId = e.target.closest('li').dataset.todoId;
+    const { todoId } = e.target.closest('li').dataset;
     return this.todos[todoId].isCompleted === true;
   };
   const initaddEventListeners = () => {
