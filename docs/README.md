@@ -14,15 +14,15 @@ todo 추가 - addTodo 함수
 - [x] 추가된 todo는 '<ul id="todo-list"></ul>'에 안에 넣어야 한다.
 - [x] 진행하고 있는 todo 갯수와 완료한 todo 갯수를 화면에 표시한다.
 
+todo 삭제
+- [x] todo의 삭제 버튼 클릭 이벤트를 받고, todo를 삭제하는 모달창(confirm)을 띄운다.
+- [x] confirm에 확인 버튼을 누르면 해당 todo는 삭제된다.
+- [x] 진행하고 있는 todo 갯수와 완료한 todo 갯수를 수정한다.
 
 todo 수정
 - [] todo의 수정 버튼 클릭 이벤트를 받고, todo 수정하는 모달창(prompt)을 띄운다.
 - [] prompt 창에 todo를 수정하고 확인 버튼을 누르면 todo가 수정된다.
 
-todo 삭제
-- [] todo의 삭제 버튼 클릭 이벤트를 받고, todo를 삭제하는 모달창(confirm)을 띄운다.
-- [] confirm에 확인 버튼을 누르면 해당 todo는 삭제된다.
-- [] 진행하고 있는 todo 갯수와 완료한 todo 갯수를 수정한다.
 
 todo 완료
 - [] todo의 완료 버튼 클릭 이벤트를 받고, todo를 완료하는 모달창(confirm)을 띄운다.

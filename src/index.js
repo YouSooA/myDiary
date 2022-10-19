@@ -47,9 +47,21 @@ export default function App() {
     showTodoList();
     resetInput();
   };
+  const removeTodo = (e) => {
+    if (confirm('정말로 삭제하시겠습니까?')) {
+      const todoId = e.target.closest('li').dataset.todoId;
+      this.todos.splice(todoId, 1);
+      showTodoList();
+    }
+  };
   $('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault();
     addTodo();
+  });
+  $('#todo-list').addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete-button')) {
+      return removeTodo(e);
+    }
   });
 }
 
