@@ -30,7 +30,7 @@ export default function App() {
     $('#todo-count').textContent = `진행: ${notCompletedCount}개 완료: ${completedCount}개`;
   };
   const render = () => {
-    const todosTemplate = this.todoList
+    const todoListTemplate = this.todoList
       .map((todo, index) => {
         return `
       <li data-todo-id="${index}" class="todo-item checked">
@@ -44,7 +44,7 @@ export default function App() {
       `;
       })
       .join('');
-    $('#todo-list').innerHTML = todosTemplate;
+    $('#todo-list').innerHTML = todoListTemplate;
     updateCount();
   };
   const addTodo = () => {
