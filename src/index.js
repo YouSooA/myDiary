@@ -7,7 +7,7 @@ export default function App() {
     if (store.getLocalStorage()) {
       this.todoList = store.getLocalStorage();
     }
-    showTodoList();
+    render();
     initaddEventListeners();
   };
   const resetInput = () => {
@@ -23,13 +23,13 @@ export default function App() {
     }
     return true;
   };
-  const showCount = () => {
+  const updateCount = () => {
     const count = $('#todo-list').querySelectorAll('li').length;
     const completedCount = this.todoList.filter((todo) => todo.isCompleted === true).length;
     const notCompletedCount = count - completedCount;
     $('#todo-count').textContent = `진행: ${notCompletedCount}개 완료: ${completedCount}개`;
   };
-  const showTodoList = () => {
+  const render = () => {
     const todosTemplate = this.todoList
       .map((todo, index) => {
         return `
@@ -45,7 +45,7 @@ export default function App() {
       })
       .join('');
     $('#todo-list').innerHTML = todosTemplate;
-    showCount();
+    updateCount();
   };
   const addTodo = () => {
     const todoInput = $('#todo-input').value;
@@ -55,14 +55,14 @@ export default function App() {
     }
     this.todoList.push({ category, content: todoInput, isCompleted: false });
     store.setLocalStorage(this.todoList);
-    showTodoList();
+    render();
     resetInput();
   };
   const deleteTodo = (todoId) => {
     if (confirm(DELETE_TODO_MASSAGE)) {
       this.todoList.splice(todoId, 1);
       store.setLocalStorage(this.todoList);
-      showTodoList();
+      render();
     }
   };
   const editContent = (todoId) => {
@@ -73,7 +73,7 @@ export default function App() {
     }
     this.todoList[todoId].content = editedContent;
     store.setLocalStorage(this.todoList);
-    showTodoList();
+    render();
   };
   const editCategory = (todoId) => {
     const { category } = this.todoList[todoId];
@@ -84,11 +84,11 @@ export default function App() {
     }
     this.todoList[todoId].category = editedCategory;
     store.setLocalStorage(this.todoList);
-    showTodoList();
+    render();
   };
   const completeTodo = (todoId) => {
     this.todoList[todoId].isCompleted = !this.todoList[todoId].isCompleted;
-    showTodoList();
+    render();
   };
   const isCompleted = (todoId) => {
     return this.todoList[todoId].isCompleted === true;
