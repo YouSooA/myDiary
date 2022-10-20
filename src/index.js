@@ -34,8 +34,8 @@ export default function App() {
     const todoListTemplate = this.todoList
       .map((todo, index) => {
         return `
-      <li data-todo-id="${index}" class="todo-item checked">
-        <div class="${todo.isCompleted ? 'completed' : ''} checkbox">✔</div>
+      <li data-todo-id="${index}" class="todo-item">
+        <div class="${todo.isCompleted ? 'completed' : ''} checkbox">&#10003;</div>
         <div class="${todo.isCompleted ? 'completed' : ''} todo">${todo.content}</div>
         <div class="todo-end">
           <span class="category">${todo.category}</span>

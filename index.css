@@ -84,7 +84,7 @@ header {
   border: 1px solid lightgray;
   cursor: pointer;
   text-align: center;
-  color: #fff;
+  color: rgba(255, 255, 255, 0);
 }
 .todo-item {
   padding-top: 10px;
